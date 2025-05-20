@@ -13,6 +13,8 @@ var now_interact_box:Interbox
 func _ready():
 	if(int(name) == multiplayer.get_unique_id()):
 		gmng.player = self
+		self.camera_2d.make_current()
+		print(gmng.player)
 	pass
 
 func _enter_tree() -> void:
@@ -20,9 +22,10 @@ func _enter_tree() -> void:
 	pass
 
 func button_do():
+	
 	if(Input.is_action_just_pressed("INTERACT") and now_interact_box != null):
 		if(now_interact_box.father_entity.has_method("interact")):
-			now_interact_box.father_entity.interact.rpc(self)
+			now_interact_box.father_entity.interact(self)
 		else:
 			print("No Interact Method")
 		pass

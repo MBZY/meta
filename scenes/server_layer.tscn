@@ -17,7 +17,8 @@ grow_horizontal = 0
 layout_mode = 2
 text = "Start Server"
 
-[node name="TextEdit" type="TextEdit" parent="HBoxContainer"]
+[node name="ip_text" type="TextEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 

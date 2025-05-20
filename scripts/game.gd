@@ -10,8 +10,9 @@ func _ready():
 func add_player(id:int) -> Player:
 	var temp_player = PLAYER.instantiate()
 	temp_player.name = str(id)
+	temp_player.global_position = Vector2.ZERO
 	players.add_child(temp_player)
 	print(id)
-	temp_player.camera_2d.make_current()
+	#temp_player.camera_2d.make_current()
 	return temp_player
 	pass

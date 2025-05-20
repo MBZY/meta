@@ -20,6 +20,7 @@ tile_map_data = PackedByteArray("AAABAAEAAgAAAA0AAAALAAQAAgACAA0AAAABAAkAAgAGAA0
 tile_set = ExtResource("1_yqjtg")
 
 [node name="Entities" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Players" type="Node2D" parent="Entities"]
 unique_name_in_owner = true
@@ -30,10 +31,17 @@ unique_name_in_owner = true
 y_sort_enabled = true
 
 [node name="Car" parent="Entities/Vehicles" instance=ExtResource("3_lbhrr")]
-position = Vector2(117, 26)
+position = Vector2(158, 31)
+
+[node name="Car2" parent="Entities/Vehicles" instance=ExtResource("3_lbhrr")]
+position = Vector2(359, 50)
 
 [node name="ServerLayer" parent="." instance=ExtResource("6_u5sy4")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://dbwrgpk8s6xaf")
 spawn_path = NodePath("../Entities/Players")
+
+[node name="MultiplayerSpawner2" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://chqb1pecet0gi")
+spawn_path = NodePath("../Entities/Vehicles")
