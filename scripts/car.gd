@@ -16,7 +16,11 @@ var current_frame := 0  # 当前显示的精灵图帧
 @onready var camera_2d: Camera2D = $Camera2D
 
 @export var taking_players:Array[Player]
+func _enter_tree() -> void:
+	set_multiplayer_authority(multiplayer.get_unique_id())
+	pass
 
+@rpc("authority","call_local")
 func interact(obj_player:Player):
 	print(gmng.player,":",obj_player)
 	if(not taking_players.has(obj_player)):
@@ -40,20 +44,10 @@ func interact(obj_player:Player):
 	
 	pass
 
-func _physics_process(delta: float) -> void:
-	if(not driven):
-		return
-	# 获取输入
-	
-	for i in taking_players:
-		i.global_position = self.global_position
-	
-	var throttle = Input.get_axis("DOWN", "UP")  # 建议设置：W上油门，S刹车
-	var steer = Input.get_axis( "LEFT","RIGHT")  # 建议设置：A左转，D右转
-	
+@rpc("authority","call_local")
+func move_the_car(steer:float,throttle:float,delta:float):
 	# 转向控制
 	current_frame = wrapi(current_frame + int(steer * steer_speed), 0, 48)
-	
 	# 速度控制
 	current_speed = lerp(current_speed, throttle * max_speed, acceleration * delta)
 	
@@ -69,3 +63,19 @@ func _physics_process(delta: float) -> void:
 	sprite.frame = current_frame
 	
 	move_and_slide()
+	pass
+
+func _physics_process(delta: float) -> void:
+	if not is_multiplayer_authority():
+		return
+	if(not driven):
+		return
+	# 获取输入
+	
+	for i in taking_players:
+		i.global_position = self.global_position
+	
+	var throttle = Input.get_axis("DOWN", "UP")  # 建议设置：W上油门，S刹车
+	var steer = Input.get_axis( "LEFT","RIGHT")  # 建议设置：A左转，D右转
+	move_the_car.rpc(steer,throttle,delta)
+	

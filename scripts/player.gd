@@ -20,9 +20,11 @@ func _enter_tree() -> void:
 	pass
 
 func button_do():
-	
 	if(Input.is_action_just_pressed("INTERACT") and now_interact_box != null):
-		now_interact_box.father_entity.interact(self)
+		if(now_interact_box.father_entity.has_method("interact")):
+			now_interact_box.father_entity.interact.rpc(self)
+		else:
+			print("No Interact Method")
 		pass
 	
 	if(not is_able_to_move):
@@ -49,6 +51,7 @@ func button_do():
 	else:
 		update_animation.rpc("idle")
 	pass
+	
 @rpc("authority","call_local")
 func update_animation(obj_animation:String):
 	sprite.play(obj_animation)
