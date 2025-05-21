@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bspm4f81imjdm"]
+
+[ext_resource type="PackedScene" uid="uid://chqb1pecet0gi" path="res://scenes/car.tscn" id="1_dm3yp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mx7b0"]
+
+[node name="Car" instance=ExtResource("1_dm3yp")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_mx7b0")

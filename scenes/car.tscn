@@ -378,6 +378,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:taking_players")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath(".:obj_sprite_sheet_id")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="Car" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -387,6 +390,7 @@ motion_mode = 1
 script = ExtResource("1_50v30")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-1, -1)
 sprite_frames = SubResource("SpriteFrames_ms3bu")
 

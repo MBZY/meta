@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1jar5g7pma4j"]
+[gd_scene load_steps=3 format=3 uid="uid://d1jar5g7pma4j"]
 
 [ext_resource type="Script" uid="uid://jgqayjgamc7f" path="res://scripts/server_layer.gd" id="1_gg3r8"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gg3r8"]
+properties/0/path = NodePath(".:car_count")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="ServerLayer" type="CanvasLayer"]
 script = ExtResource("1_gg3r8")
@@ -26,5 +31,25 @@ layout_mode = 2
 layout_mode = 2
 text = "Join Server"
 
+[node name="LoadCars" type="Button" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "LoadCars"
+
+[node name="SaveWhenGenerate" type="CheckButton" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "SaveWhenGenerate"
+
+[node name="GenerateCars" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "GenerateCars
+"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_gg3r8")
+
 [connection signal="pressed" from="HBoxContainer/ServerDo" to="." method="_on_server_do_pressed"]
 [connection signal="pressed" from="HBoxContainer/ServerJoin" to="." method="_on_server_join_pressed"]
+[connection signal="pressed" from="HBoxContainer/LoadCars" to="." method="_on_load_cars_pressed"]
+[connection signal="pressed" from="HBoxContainer/GenerateCars" to="." method="_on_generate_cars_pressed"]

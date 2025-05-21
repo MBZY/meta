@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/car.gd" id="1_qipfw"]
+[ext_resource type="SpriteFrames" path="res://assets/cars_sprite_frames/Green_WAGON_CLEAN_All_000-sheet.png.tres" id="2_gaihi"]
+[ext_resource type="Script" path="res://scripts/interbox.gd" id="3_6enfw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(87, 34)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gee14"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
+size = Vector2(12, 4)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_50v30"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:current_frame")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:frame")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:taking_players")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="19" type="CharacterBody2D"]
+y_sort_enabled = true
+position = Vector2(150, 250)
+collision_layer = 2
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_qipfw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1, -1)
+sprite_frames = ExtResource("2_gaihi")
+
+[node name="Interbox" type="Area2D" parent="." node_paths=PackedStringArray("father_entity")]
+position = Vector2(-1, 15)
+script = ExtResource("3_6enfw")
+father_entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interbox"]
+position = Vector2(0.5, -10)
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(-1, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_gee14")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 13)
+shape = SubResource("RectangleShape2D_0tnpc")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 15)
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_50v30")
+
+[connection signal="mouse_entered" from="Interbox" to="Interbox" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Interbox" to="Interbox" method="_on_mouse_exited"]
