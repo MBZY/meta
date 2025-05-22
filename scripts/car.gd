@@ -16,6 +16,14 @@ class_name Car
 @onready var camera_2d: Camera2D = $Camera2D
 
 @export var taking_players:Array[int]
+@export var obj_sprite_sheet_id:int
+@onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
+
+@rpc("authority","call_local")
+func set_sprite():
+	if(gmng.game_scene.sprites.size()>obj_sprite_sheet_id):
+		sprite.sprite_frames = gmng.game_scene.sprites[obj_sprite_sheet_id]
+	pass
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(1)
