@@ -28,7 +28,7 @@ func add_car(id:int,car_id:int,pos:Vector2):
 	car_scene.name = str(id)
 	vehicles.add_child(car_scene)
 	car_scene.animated_sprite_2d.sprite_frames = sprites[car_id]
-	car_scene.global_position = Vector2(0,100)+Vector2(150,0)*(car_id%6)+Vector2(0,50)*floori(car_id/6)
+	car_scene.global_position = pos
 	car_scene.obj_sprite_sheet_id = car_id
 	#temp_player.camera_2d.make_current()
 	return car_scene

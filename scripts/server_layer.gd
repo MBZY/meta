@@ -95,7 +95,7 @@ func car_count_set(x):
 func _on_generate_cars_pressed() -> void:
 	for i in range(gmng.game_scene.sprites.size()):
 		var temp_car = CAR.instantiate()
-		gmng.game_scene.add_car.rpc_id(1,car_count,i,Vector2(0,100)+Vector2(150,0)*(i%6)+Vector2(0,50)*floori(i/6))
+		gmng.game_scene.add_car.rpc_id(1,car_count,i,Vector2(-2340,1700)+Vector2(150,0)*(i%6)+Vector2(0,50)*floori(i/6))
 		car_count_set.rpc_id(1,car_count+1)
 		if(save_when_generate.button_pressed):
 			var scene = PackedScene.new()

@@ -49,6 +49,11 @@ text = "GenerateCars
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_gg3r8")
 
+[node name="SCNUSPACEBUILD" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "SCNU SPACE Online v0.2build16 --- Only For Record --- "
+
 [connection signal="pressed" from="HBoxContainer/ServerDo" to="." method="_on_server_do_pressed"]
 [connection signal="pressed" from="HBoxContainer/ServerJoin" to="." method="_on_server_join_pressed"]
 [connection signal="pressed" from="HBoxContainer/LoadCars" to="." method="_on_load_cars_pressed"]
