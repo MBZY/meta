@@ -4,6 +4,7 @@ class_name GameScene
 @onready var vehicles: Node2D = %Vehicles
 const PLAYER = preload("res://scenes/player.tscn")
 const CAR = preload("res://scenes/car.tscn")
+@onready var server_layer: CanvasLayer = %ServerLayer
 
 var sprites:Array[SpriteFrames]
 var sprites_names:Array[String]

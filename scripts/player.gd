@@ -5,10 +5,27 @@ class_name Player
 
 @onready var sprite := $AnimatedSprite2D
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var speaking: PanelContainer = %Speaking
 
 @export var is_able_to_move:bool = true
 
 var now_interact_box:Interbox
+#func try_show_speaking():
+	#if(speaking.visible and speaking.modulate==Color(0,0,0,1)):
+		#return
+	#
+	#pass
+@onready var words: Label = %Words
+
+@rpc("any_peer","call_local")
+func speak(str:String):
+	speaking.show()
+	
+	words.text = str
+	
+	await get_tree().create_timer(3).timeout
+	speaking.hide()
+	pass
 
 func _ready():
 	if(int(name) == multiplayer.get_unique_id()):

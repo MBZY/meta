@@ -92,7 +92,7 @@ func get_all_children(node: Node) -> Array:
 func car_count_set(x):
 	car_count = x
 	pass
-func _on_generate_cars_pressed() -> void:
+func generate_cars():
 	for i in range(gmng.game_scene.sprites.size()):
 		var temp_car = CAR.instantiate()
 		gmng.game_scene.add_car.rpc_id(1,car_count,i,Vector2(-2340,1700)+Vector2(150,0)*(i%6)+Vector2(0,50)*floori(i/6))
@@ -106,4 +106,7 @@ func _on_generate_cars_pressed() -> void:
 			if(result == OK):
 				ResourceSaver.save(scene,"res://assets/car_scenes/"+gmng.game_scene.sprites_names[i]+".tscn")
 			
+	pass
+func _on_generate_cars_pressed() -> void:
+	generate_cars()
 	pass # Replace with function body.

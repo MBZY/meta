@@ -20,14 +20,21 @@ func server_do(port:int = classic_port,max_clients:int = 16):
 	gmng.player = gmng.game_scene.add_player(multiplayer.get_unique_id())
 	pass
 
-func client_do(address:String="127.0.0.1",port:int = classic_port):
+func client_do(address:String="127.0.0.1",port:int = classic_port)->Error:
+	if(address.find(":")!=-1):
+		var ts = address.split(":")
+		address = ts[0]
+		port = int(ts[1])
+		print(address)
+		print(port)
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, port)
 	if(error!=OK):
 		print("!",error)
-		return
+		return error
 	#print("AAA")
 	multiplayer.multiplayer_peer = peer
+	return OK
 	pass
 
 func _on_peer_connected(id:int):

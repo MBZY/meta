@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://dlqgiwsivl3pd"]
+[gd_scene load_steps=38 format=4 uid="uid://dlqgiwsivl3pd"]
 
 [ext_resource type="Script" uid="uid://c23jkllphte1w" path="res://scripts/game.gd" id="1_u5sy4"]
 [ext_resource type="TileSet" uid="uid://5eyqc543jkjh" path="res://assets/tilesets/Base.tres" id="1_yqjtg"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://c8b5qailegf35" path="res://assets/Resources/筛选素材/建筑/废土风建筑/Tileset_77_MV.png" id="12_bhx41"]
 [ext_resource type="Texture2D" uid="uid://bw55vc860f5yk" path="res://assets/Tileset_17_MV.png" id="14_sww3w"]
 [ext_resource type="Texture2D" uid="uid://uw7v5dj27kvc" path="res://assets/Tileset_16_MV.png" id="15_suyxu"]
+[ext_resource type="Script" uid="uid://h20yuq71ljbt" path="res://scripts/talk_layer.gd" id="20_1kice"]
+[ext_resource type="PackedScene" uid="uid://dr4y0vb6sm5tv" path="res://scenes/INTERFACE.tscn" id="21_5newe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_37s47"]
 texture = ExtResource("3_ir15t")
@@ -7183,7 +7185,35 @@ position = Vector2(158, 31)
 [node name="Car2" parent="Entities/Vehicles" instance=ExtResource("3_lbhrr")]
 position = Vector2(359, 50)
 
+[node name="Talk" type="CanvasLayer" parent="."]
+script = ExtResource("20_1kice")
+
+[node name="TalkPanel" type="HBoxContainer" parent="Talk"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -50.0
+offset_right = 250.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Talk/TalkPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "聊天栏"
+
+[node name="LineEdit" type="LineEdit" parent="Talk/TalkPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
 [node name="ServerLayer" parent="." instance=ExtResource("6_u5sy4")]
+unique_name_in_owner = true
+visible = false
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://dbwrgpk8s6xaf")
@@ -7196,3 +7226,12 @@ spawn_path = NodePath("../Entities/Vehicles")
 [node name="Node2D" type="Node2D" parent="."]
 visible = false
 position = Vector2(-2340, 1700)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("21_5newe")]
+
+[node name="SCNUSPACEBUILD" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "SCNU SPACE Online v0.2build16 --- Only For Record --- "
